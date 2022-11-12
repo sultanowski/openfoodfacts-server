@@ -150,10 +150,19 @@ $productsGutter:12;
   .f-dropdown {
     a { color: $primary-color; }
   }
-  &__results { color: $white; }
+  &__results { 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $white; 
+    .material-icons { font-size: 18px; }
+  }
   &__buttons {
     display: flex;
     gap: 1rem;
+    .button > .material-icons {
+      padding-right: 8px;
+    }
   }
 }
 

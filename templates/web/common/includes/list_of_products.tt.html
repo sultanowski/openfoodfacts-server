@@ -39,11 +39,17 @@
   <div class="row">
     <div class="small-12 columns filterProducts">
       <div>
-        <span class="filterProducts__results">[% display_icon('search') %][% html_count %]</span>
+        <span class="filterProducts__results">
+          <span class="material-icons">search</span>
+          [% html_count %]
+        </span>
       </div>
       <div class="filterProducts__buttons">
         <div>
-          <button href="#" data-dropdown="drop_sort" aria-controls="drop_sort" aria-expanded="false" class="button round dropdown small secondary unmarged">[% display_icon('sort_arrows') %]<span>[% lang("sort_by_${sort_by}") %]</span></button>
+          <button href="#" data-dropdown="drop_sort" aria-controls="drop_sort" aria-expanded="false" class="button round dropdown small secondary unmarged">
+            <span class="material-icons">swap_vert</span>
+            [% lang("sort_by_${sort_by}") %]
+          </button>
           <ul id="drop_sort" data-dropdown-content class="f-dropdown" aria-hidden="true">
           [% FOREACH sort_option IN sort_options %]
             <li>
@@ -55,7 +61,10 @@
         [% IF current_link.defined %]
         [% IF explore_products == 'true' %]
         <div>
-          <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button round dropdown small secondary unmarged">[% display_icon('sort') %] [% lang('explore_products_by') %]</button>
+          <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button round dropdown small secondary unmarged">
+            <span class="material-icons">sort</span>
+            [% lang('explore_products_by') %]
+          </button>
           <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
           [% FOREACH newtagtype IN current_drilldown_fields %]
             <li>
