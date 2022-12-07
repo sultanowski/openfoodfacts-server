@@ -101,7 +101,7 @@ $evaluation-good-color: #219653;
 $evaluation-average-color: #f2994a;
 $evaluation-bad-color: #eb5757;
 $evaluation-unknown-color: #4f4f4f;
-//** add options to found5 //
+/* add options to found5 */
 .row.full-width {
   width: 100%;
   max-width: 100%;
@@ -520,18 +520,9 @@ h4 > .icon {
 
 .percent_bar {
   background-color: #88bbff;
-}
-
-.percent_bar.red {
-  background-color: $evaluation-bad-color;
-}
-
-.percent_bar.orange {
-  background-color: $evaluation-average-color;
-}
-
-.percent_bar.green {
-  background-color: $evaluation-good-color;
+  .red { background-color: $evaluation_bad_color; }
+  .orange { background-color: $evaluation-average-color; }
+  .green { background-color: $evaluation-good-color; }
 }
 
 a[aria-controls="idOfLeftMenu"] {
@@ -548,11 +539,6 @@ a[aria-controls="idOfLeftMenu"] {
 
 ul.pagination li a {
   color: black;
-}
-
-.share_button,
-.edit_button {
-  //float: right;
 }
 
 .delete_button {
@@ -630,82 +616,68 @@ html[dir="rtl"] {
   text-align: center;
 }
 
-.list_product_banner {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  padding: 2px;
-  display: block;
-  color: white;
-  font-size: 0.8rem;
-  text-align: center;
-}
+// Using SCSS @each to reduce lines of code.
+$grades:
+  'does_not_match' $grade-e-color,
+  'may_not_match' $grade-d-color,
+  'poor_match' $grade-c-color,
+  'good_match' $grade-b-color,
+  'very_good_match' $grade-a-color,
+  'unknown_match' $grade_unknown_color,
+  'unranked' $grade_unknown_color;
 
-.list_product_banner_does_not_match {
-  background-color: $grade-e-color;
-}
-
-.list_product_banner_may_not_match {
-  background-color: $grade-d-color;
-}
-
-.list_product_banner_unknown_match {
-  background-color: #888;
-}
-
-.list_product_banner_poor_match {
-  background-color: $grade-c-color;
-}
-
-.list_product_banner_good_match {
-  background-color: $grade-b-color;
-}
-
-.list_product_banner_very_good_match {
-  background-color: $grade-a-color;
-}
-
-.list_product_content {
-  border-radius: 8px;
-  padding: 10px;
-  display: block;
+@each $class, $grade-color in $grades {
+  .list_product {
+    &_content {
+      border-radius: 8px;
+      padding: 10px;
+      display: block;
+    }
+    &_banner {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      padding: 2px;
+      display: block;
+      color: white;
+      font-size: 0.8rem;
+      text-align: center;
+      &_#{$class} {
+        background-color: $grade-color;
+      }
+    }
+  }
+  .product_banner {
+    &_#{$class} {
+      background-color: lighten($grade-color, 50%);
+      color: lighten($grade-color, 50%);
+    }
+  }
+  .match_score {
+    color: white;
+    font-weight: bold;
+    padding: 12px 0px;
+    width: 50px;
+    height: 50px;
+    border-radius: 200px;
+    display: inline-block;
+    &_#{$class} {
+      color: $grade-color;
+    }
+  }
+  .match_status {
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 200px;
+    &_#{$class} {
+      background-color: $grade-color;
+      color: lighten($grade-color, 75%);
+    }
+  }
 }
 
 #product_banner {
   color: black;
-}
-
-.product_banner_unranked {
-  background-color: #dff4ff;
-}
-
-.product_banner_does_not_match {
-  color: $grade-e-color;
-  background-color: scale-color($grade-e-color, $lightness: 50%);
-}
-
-.product_banner_may_not_match {
-  color: $grade-d-color;
-  background-color: scale-color($grade-d-color, $lightness: 50%);
-}
-
-.product_banner_unknown_match {
-  color: #888;
-  background-color: scale-color(#888, $lightness: 50%);
-}
-
-.product_banner_poor_match {
-  color: $grade-c-color;
-  background-color: scale-color($grade-c-color, $lightness: 50%);
-}
-
-.product_banner_good_match {
-  color: $grade-b-color;
-  background-color: scale-color($grade-b-color, $lightness: 50%);
-}
-
-.product_banner_very_good_match {
-  color: $grade-a-color;
-  background-color: scale-color($grade-a-color, $lightness: 50%);
 }
 
 #match_title {
@@ -718,77 +690,6 @@ html[dir="rtl"] {
 
 #product_summary {
   clear: both;
-}
-
-.match_status {
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 200px;
-}
-
-.match_score {
-  color: white;
-  font-weight: bold;
-  padding: 12px 0px;
-  width: 50px;
-  height: 50px;
-  border-radius: 200px;
-  display: inline-block;
-}
-
-.match_status_does_not_match {
-  color: $grade-e-color;
-  background-color: scale-color($grade-e-color, $lightness: 75%);
-}
-
-.match_status_may_not_match {
-  color: $grade-d-color;
-  background-color: scale-color($grade-d-color, $lightness: 75%);
-}
-
-.match_status_unknown_match {
-  color: #888;
-  background-color: scale-color(#888, $lightness: 75%);
-}
-
-.match_status_poor_match {
-  color: $grade-c-color;
-  background-color: scale-color($grade-c-color, $lightness: 75%);
-}
-
-.match_status_good_match {
-  color: $grade-b-color;
-  background-color: scale-color($grade-b-color, $lightness: 75%);
-}
-
-.match_status_very_good_match {
-  color: $grade-a-color;
-  background-color: scale-color($grade-a-color, $lightness: 75%);
-}
-
-.match_score_does_not_match {
-  background-color: $grade-e-color;
-}
-
-.match_score_may_not_match {
-  background-color: $grade-d-color;
-}
-
-.match_score_unknown_match {
-  background-color: #888;
-}
-
-.match_score_poor_match {
-  background-color: $grade-c-color;
-}
-
-.match_score_good_match {
-  background-color: $grade-b-color;
-}
-
-.match_score_very_good_match {
-  background-color: $grade-a-color;
 }
 
 .search_results .list_display_barcode {
